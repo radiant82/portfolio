@@ -2,26 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ===== Base Styles ===== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-darker text-gray-200 font-poppins;
+    background: linear-gradient(
+      135deg,
+      #020617 0%,
+      #0a0f1c 25%,
+      #172554 50%,
+      #0f172a 75%,
+      #020617 100%
+    );
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #060a14;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(6, 182, 212, 0.4);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(6, 182, 212, 0.6);
+  }
+
+  /* Focus Visible */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-cyan-400 ring-offset-2 ring-offset-darker;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* ===== Component Utilities ===== */
+@layer components {
+  .text-gradient {
+    @apply bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl
+      bg-gradient-to-r from-cyan-500 to-blue-600
+      text-white font-semibold
+      shadow-lg shadow-cyan-500/25
+      hover:shadow-cyan-500/40 hover:scale-105
+      active:scale-95
+      transition-all duration-300 ease-out;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl
+      border border-cyan-500/50 text-cyan-400
+      hover:bg-cyan-500/10 hover:border-cyan-400 hover:scale-105
+      active:scale-95
+      transition-all duration-300 ease-out;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28 px-4 md:px-8;
+  }
+
+  .section-header {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4;
+  }
+
+  .section-subheader {
+    @apply text-gray-400 text-center max-w-2xl mx-auto mb-12 md:mb-16;
+  }
 }
 
+/* ===== Utility Animations ===== */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-shadow-glow {
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
   }
 }
